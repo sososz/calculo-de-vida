@@ -1,13 +1,11 @@
 from django.db import models
 
-class Pais(models.Model):
-
-    pais_id = models.AutoField(primary_key=True)
-    pais_nome = models.CharField(max_length=100, default='')
-    pais_moeda = models.CharField(max_length=100, default='')
+class Estado(models.Model):
+    estado_id = models.AutoField(primary_key=True)
+    estado_nome = models.CharField(max_length=100, default='')
 
     def __str__(self):
-        return f'País: {self.pais_nome} | Moeda: {self.pais_moeda}'
+        return f'Estado: {self.estado_nome}'
 
 class Regiao(models.Model):
     REGIAO_TIPOS = [
@@ -18,7 +16,7 @@ class Regiao(models.Model):
     ]
 
     regiao_id = models.AutoField(primary_key=True)
-    pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
+    estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
     regiao_tipo = models.CharField(max_length=10, choices=REGIAO_TIPOS)
 
     def __str__(self):
